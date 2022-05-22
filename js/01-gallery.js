@@ -4,9 +4,12 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 
 
+
 const galleryContainer = document.querySelector('.gallery');
 const cardsMarkup = createGalleryMarkup(galleryItems);
 galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
+galleryContainer.addEventListener('click', ongGalleryContainerClick);
+
 
 
 function createGalleryMarkup(galleryItems) {
@@ -27,3 +30,15 @@ function createGalleryMarkup(galleryItems) {
     
 }
 
+function ongGalleryContainerClick(evt) {
+    evt.preventDefault();
+    if (!evt.target.classList.contains('gallery__image')) {
+        return
+    }
+    else {
+      const instance = basicLightbox.create(`
+        <img src = "${evt.target.dataset.source}"/>`)
+instance.show()  
+    }
+    console.log(evt.target);
+};
