@@ -37,8 +37,19 @@ function ongGalleryContainerClick(evt) {
     }
     else {
       const instance = basicLightbox.create(`
-        <img src = "${evt.target.dataset.source}"/>`)
-instance.show()  
+        <img src = "${evt.target.dataset.source}"/>`, 
+          window.addEventListener('keydown', onEscPress));
+    
+  instance.show();
+
+  function onEscPress(evt) {
+        if (evt.key === 'Escape') {
+            instance.close();
+            window.removeEventListener('keydown', onEscPress);
+        }
+}
+        
     }
     console.log(evt.target);
+
 };
