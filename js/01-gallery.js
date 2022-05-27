@@ -38,7 +38,7 @@ function ongGalleryContainerClick(evt) {
     else {
       const instance = basicLightbox.create(`
         <img src = "${evt.target.dataset.source}"/>`, 
-          window.addEventListener('keydown', onEscPress));
+          window.addEventListener('keydown', onEscPress, onClickPress));
     
   instance.show();
 
@@ -47,7 +47,13 @@ function ongGalleryContainerClick(evt) {
             instance.close();
             window.removeEventListener('keydown', onEscPress);
         }
-}
+        };
+  function onClickPress(evt) {
+        if (evt.key === 'click') {
+            instance.close();
+            window.removeEventListener('click', onClickPress);
+        }
+  }
         
     }
     console.log(evt.target);
